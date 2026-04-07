@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disease Infographic Rubric</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:    #1F4E79;
+    --blue:    #2E75B6;
+    --sky:     #D5E8F0;
+    --gold:    #F5C842;
+    --gold-lt: #FFF8DC;
+    --green:   #375623;
+    --green-lt:#E2EFDA;
+    --orange:  #ED7D31;
+    --orange-lt:#FCE4D6;
+    --red:     #C00000;
+    --red-lt:  #FFCCCC;
+    --amber:   #BF8F00;
+    --amber-lt:#FFF2CC;
+    --gray:    #F4F5F7;
+    --gray2:   #E8EAED;
+    --ink:     #2C2C2C;
+    --muted:   #6B7280;
+    --white:   #FFFFFF;
+    --radius:  10px;
+    --shadow:  0 2px 12px rgba(31,78,121,.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #EEF3F8;
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── Page wrapper ─────────────────────────────────────── */
+  .page {
+    max-width: 860px;
+    margin: 32px auto 60px;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 4px 32px rgba(31,78,121,.14);
+    overflow: hidden;
+  }
+
+  /* ── Header banner ────────────────────────────────────── */
+  .header {
+    background: var(--navy);
+    padding: 36px 44px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content:'';
+    position:absolute; top:-40px; right:-40px;
+    width:220px; height:220px;
+    border-radius:50%;
+    background: rgba(245,200,66,.15);
+  }
+  .header::after {
+    content:'';
+    position:absolute; bottom:-60px; right:60px;
+    width:140px; height:140px;
+    border-radius:50%;
+    background: rgba(46,117,182,.25);
+  }
+  .header-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .header-sub {
+    color: rgba(213,232,240,.85);
+    font-size: 13.5px;
+    font-weight: 300;
+  }
+  .header-points {
+    display: inline-block;
+    margin-top: 16px;
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 5px 16px;
+    border-radius: 20px;
+    letter-spacing: .03em;
+  }
+
+  /* ── Body padding ─────────────────────────────────────── */
+  .body { padding: 36px 44px 44px; }
+
+  /* ── Student info row ─────────────────────────────────── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .info-field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 5px;
+  }
+  .info-field input[type="text"] {
+    width: 100%;
+    border: 2px solid var(--gray2);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    color: var(--ink);
+    background: var(--gray);
+    transition: border-color .2s, background .2s;
+    outline: none;
+  }
+  .info-field input:focus {
+    border-color: var(--blue);
+    background: var(--white);
+  }
+
+  /* ── Section header ───────────────────────────────────── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 32px 0 20px;
+  }
+  .section-divider span {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .section-divider::before, .section-divider::after {
+    content:''; flex:1; height:1px; background:var(--gray2);
+  }
+
+  /* ── Legend ───────────────────────────────────────────── */
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .legend-item {
+    border-radius: var(--radius);
+    padding: 10px 8px;
+    text-align: center;
+    border: 1.5px solid transparent;
+  }
+  .legend-item .score-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .legend-item .score-name {
+    font-size: 10.5px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .s4 { background:var(--green-lt); border-color:#B8D9A4; }
+  .s4 .score-num, .s4 .score-name { color:var(--green); }
+  .s3 { background:var(--sky); border-color:#A8CCDF; }
+  .s3 .score-num, .s3 .score-name { color:var(--blue); }
+  .s2 { background:var(--orange-lt); border-color:#F5BFA0; }
+  .s2 .score-num, .s2 .score-name { color:var(--orange); }
+  .s1 { background:var(--amber-lt); border-color:#E8C96C; }
+  .s1 .score-num, .s1 .score-name { color:var(--amber); }
+  .s0 { background:var(--red-lt); border-color:#E8A0A0; }
+  .s0 .score-num, .s0 .score-name { color:var(--red); }
+
+  /* ── Instructions box ─────────────────────────────────── */
+  .instructions-box {
+    background: var(--gold-lt);
+    border: 2px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 32px;
+  }
+  .instructions-box h3 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .instructions-box p {
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .instructions-box ul {
+    padding-left: 18px;
+  }
+  .instructions-box ul li {
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  /* ── Category card ────────────────────────────────────── */
+  .category-card {
+    border: 1.5px solid var(--gray2);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .cat-header {
+    background: var(--navy);
+    padding: 16px 22px;
+  }
+  .cat-number {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2px;
+  }
+  .cat-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+  .cat-subtitle {
+    font-size: 12px;
+    color: rgba(213,232,240,.8);
+    font-style: italic;
+  }
+
+  .exemplar-strip {
+    background: var(--gold-lt);
+    border-bottom: 1.5px solid #EDD97A;
+    padding: 10px 22px;
+    font-size: 12px;
+    color: var(--ink);
+  }
+  .exemplar-strip strong {
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  /* ── Score options (radio cards) ─────────────────────── */
+  .score-options {
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .score-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    border-radius: 10px;
+    padding: 12px 14px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+    background: var(--gray);
+  }
+  .score-option:hover { background: var(--sky); border-color: var(--blue); }
+
+  .score-option input[type="radio"] {
+    margin-top: 2px;
+    accent-color: var(--blue);
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .score-option input[type="radio"]:checked + .option-content {
+    opacity: 1;
+  }
+
+  .option-content { flex: 1; }
+
+  .option-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+  .badge-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    line-height: 1;
+  }
+  .badge-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  .option-desc {
+    font-size: 12.5px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  /* color variants per score */
+  .opt-4 { background:#F0F7EC; }
+  .opt-4:hover, .opt-4:has(input:checked) { background:#D8EDD0; border-color:#70AD47; }
+  .opt-4 .badge-num, .opt-4 .badge-label { color: var(--green); }
+
+  .opt-3 { background:#EBF4FA; }
+  .opt-3:hover, .opt-3:has(input:checked) { background:#C8E0F0; border-color:var(--blue); }
+  .opt-3 .badge-num, .opt-3 .badge-label { color: var(--blue); }
+
+  .opt-2 { background:#FDF2EC; }
+  .opt-2:hover, .opt-2:has(input:checked) { background:#F9D8C0; border-color:var(--orange); }
+  .opt-2 .badge-num, .opt-2 .badge-label { color: var(--orange); }
+
+  .opt-1 { background:#FFFAE8; }
+  .opt-1:hover, .opt-1:has(input:checked) { background:#FFE99A; border-color:#BF8F00; }
+  .opt-1 .badge-num, .opt-1 .badge-label { color: var(--amber); }
+
+  .opt-0 { background:#FFF0F0; }
+  .opt-0:hover, .opt-0:has(input:checked) { background:#FFD0D0; border-color:var(--red); }
+  .opt-0 .badge-num, .opt-0 .badge-label { color: var(--red); }
+
+  /* feedback textarea per category */
+  .cat-feedback {
+    padding: 0 22px 18px;
+  }
+  .cat-feedback label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 5px;
+  }
+  .cat-feedback textarea {
+    width: 100%;
+    border: 2px solid var(--gray2);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    background: var(--gray);
+    resize: vertical;
+    min-height: 52px;
+    outline: none;
+    transition: border-color .2s, background .2s;
+  }
+  .cat-feedback textarea:focus {
+    border-color: var(--blue);
+    background: var(--white);
+  }
+
+  /* ── Score summary panel ──────────────────────────────── */
+  .summary-panel {
+    background: var(--gray);
+    border: 1.5px solid var(--gray2);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .summary-header {
+    background: var(--blue);
+    padding: 12px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .summary-header h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--white);
+  }
+  .total-display {
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 4px 16px;
+    border-radius: 20px;
+  }
+  .summary-row {
+    display: grid;
+    grid-template-columns: 1fr 80px 80px;
+    padding: 10px 22px;
+    border-bottom: 1px solid var(--gray2);
+    font-size: 13px;
+    align-items: center;
+    gap: 8px;
+  }
+  .summary-row:last-child { border-bottom: none; }
+  .summary-row:nth-child(odd) { background: var(--white); }
+  .sum-cat { font-weight: 600; color: var(--navy); }
+  .sum-pts { text-align: center; font-weight: 700; font-size: 18px; color: var(--blue); }
+  .sum-pts.unset { color: var(--gray2); }
+  .sum-max { text-align: center; color: var(--muted); font-size: 12px; }
+
+  /* ── Grade scale ──────────────────────────────────────── */
+  .grade-scale {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .grade-item {
+    border-radius: var(--radius);
+    padding: 12px 8px;
+    text-align: center;
+    border: 1.5px solid transparent;
+  }
+  .grade-item .grade-letter {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .grade-item .grade-range {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .grade-item .grade-pct {
+    font-size: 11px;
+    opacity: .7;
+  }
+  .ga { background:var(--green-lt); border-color:#B8D9A4; }
+  .ga .grade-letter,.ga .grade-range,.ga .grade-pct { color:var(--green); }
+  .gb { background:var(--sky); border-color:#A8CCDF; }
+  .gb .grade-letter,.gb .grade-range,.gb .grade-pct { color:var(--blue); }
+  .gc { background:var(--orange-lt); border-color:#F5BFA0; }
+  .gc .grade-letter,.gc .grade-range,.gc .grade-pct { color:var(--orange); }
+  .gd { background:var(--amber-lt); border-color:#E8C96C; }
+  .gd .grade-letter,.gd .grade-range,.gd .grade-pct { color:var(--amber); }
+  .gf { background:var(--red-lt); border-color:#E8A0A0; }
+  .gf .grade-letter,.gf .grade-range,.gf .grade-pct { color:var(--red); }
+
+  /* ── Overall comments ─────────────────────────────────── */
+  .comments-box {
+    background: var(--sky);
+    border: 2px solid #A8CCDF;
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 28px;
+  }
+  .comments-box label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--navy);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .comments-box textarea {
+    width: 100%;
+    border: 2px solid #A8CCDF;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    color: var(--ink);
+    background: var(--white);
+    resize: vertical;
+    min-height: 90px;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .comments-box textarea:focus { border-color: var(--blue); }
+
+  /* ── Signature row ────────────────────────────────────── */
+  .sig-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  /* ── Submit / print buttons ───────────────────────────── */
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 11px 24px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: opacity .15s, transform .1s;
+  }
+  .btn:hover { opacity: .88; transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn-primary { background: var(--navy); color: var(--white); }
+  .btn-secondary { background: var(--gray2); color: var(--ink); }
+
+  /* ── Print styles ─────────────────────────────────────── */
+  @media print {
+    body { background: white; font-size: 11px; }
+    .page { box-shadow: none; border-radius: 0; margin: 0; max-width: 100%; }
+    .btn-row { display: none; }
+    .score-option { border: 1px solid #ccc; break-inside: avoid; }
+    .category-card { break-inside: avoid; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ── Header ── -->
+  <div class="header">
+    <div class="header-label">Individual Research Component — Step 8</div>
+    <h1>Disease Infographic Rubric</h1>
+    <div class="header-sub">Diagnosing Disease Across Body Systems &nbsp;·&nbsp; High School Biology / Health Science</div>
+    <div class="header-points">Total Points: 24 &nbsp;(6 categories × 4 points each)</div>
+  </div>
+
+  <div class="body">
+
+    <!-- ── Student Info ── -->
+    <div class="info-grid">
+      <div class="info-field">
+        <label>Student Name</label>
+        <input type="text" placeholder="First Last" id="s-name">
+      </div>
+      <div class="info-field">
+        <label>Disease Chosen</label>
+        <input type="text" placeholder="e.g. Asthma" id="s-disease">
+      </div>
+      <div class="info-field">
+        <label>Body System &amp; Period</label>
+        <input type="text" placeholder="e.g. Respiratory · Period 3" id="s-system">
+      </div>
+    </div>
+
+    <!-- ── Score Legend ── -->
+    <div class="section-divider"><span>Scoring Legend</span></div>
+    <div class="legend">
+      <div class="legend-item s4"><div class="score-num">4</div><div class="score-name">Exceeds Expectations</div></div>
+      <div class="legend-item s3"><div class="score-num">3</div><div class="score-name">Meets Expectations</div></div>
+      <div class="legend-item s2"><div class="score-num">2</div><div class="score-name">Approaching Expectations</div></div>
+      <div class="legend-item s1"><div class="score-num">1</div><div class="score-name">Below Expectations</div></div>
+      <div class="legend-item s0"><div class="score-num">0</div><div class="score-name">Missing / Not Attempted</div></div>
+    </div>
+
+    <!-- ── Assignment Instructions ── -->
+    <div class="instructions-box">
+      <h3>Assignment Instructions (Step 8)</h3>
+      <p>When you have completed your rounds of all patients, each group member will research one of the five diseases and create an <strong>infographic</strong> for that disease. See the attached example for <em>Sarcopenia</em>. You must include all of the following for full credit:</p>
+      <ul>
+        <li>An informational overview of the disease.</li>
+        <li>A detailed description of the signs and symptoms of the disease.</li>
+        <li>The etiology of the disease — as if you were explaining it to the patient and their family.</li>
+        <li>How the disease is diagnosed (testing).</li>
+        <li>The prognosis of the disease.</li>
+      </ul>
+    </div>
+
+    <!-- ── Category Cards ── -->
+    <div class="section-divider"><span>Rubric Categories</span></div>
+
+    <!-- Category data -->
+    <div id="categories-container"></div>
+
+    <!-- ── Score Summary ── -->
+    <div class="section-divider"><span>Score Summary</span></div>
+
+    <div class="summary-panel">
+      <div class="summary-header">
+        <h3>Category Scores</h3>
+        <div class="total-display" id="total-display">Total: — / 24</div>
+      </div>
+      <div id="summary-rows"></div>
+    </div>
+
+    <!-- ── Grade Scale ── -->
+    <div class="section-divider"><span>Grade Scale</span></div>
+    <div class="grade-scale">
+      <div class="grade-item ga"><div class="grade-letter">A</div><div class="grade-range">22–24 pts</div><div class="grade-pct">92–100%</div></div>
+      <div class="grade-item gb"><div class="grade-letter">B</div><div class="grade-range">19–21 pts</div><div class="grade-pct">79–91%</div></div>
+      <div class="grade-item gc"><div class="grade-letter">C</div><div class="grade-range">14–18 pts</div><div class="grade-pct">58–78%</div></div>
+      <div class="grade-item gd"><div class="grade-letter">D</div><div class="grade-range">10–13 pts</div><div class="grade-pct">42–57%</div></div>
+      <div class="grade-item gf"><div class="grade-letter">F</div><div class="grade-range">0–9 pts</div><div class="grade-pct">0–41%</div></div>
+    </div>
+
+    <!-- ── Overall Comments ── -->
+    <div class="section-divider"><span>Overall Feedback</span></div>
+    <div class="comments-box">
+      <label>Overall Comments / Feedback</label>
+      <textarea id="overall-comments" placeholder="Write overall feedback for the student here…"></textarea>
+    </div>
+
+    <!-- ── Signatures ── -->
+    <div class="sig-row">
+      <div class="info-field">
+        <label>Teacher Signature</label>
+        <input type="text" placeholder="Sign here">
+      </div>
+      <div class="info-field">
+        <label>Date Returned</label>
+        <input type="text" placeholder="MM / DD / YYYY">
+      </div>
+    </div>
+
+    <!-- ── Buttons ── -->
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="window.print()">🖨 Print / Save as PDF</button>
+      <button class="btn btn-primary" onclick="clearForm()">↺ Reset Form</button>
+    </div>
+
+  </div><!-- /body -->
+</div><!-- /page -->
+
+<script>
+// ── Rubric data ────────────────────────────────────────────────────────────────
+const categories = [
+  {
+    num: "1",
+    title: "Disease Overview",
+    subtitle: "Informational overview of the disease — what it is, who it affects, and why it matters",
+    exemplar: "The Sarcopenia infographic opens with a clear title, word origin (\"Sarco = flesh, penia = loss\"), a concise definition, and population statistics (e.g., \"33% of nursing home residents\"). The overview is written in plain, patient-friendly language.",
+    descriptors: [
+      { score: 4, label: "Exceeds Expectations",    text: "Provides a thorough, accurate overview including: disease name and definition, word origin or meaning (where applicable), who is affected (age, population, prevalence/statistics), and why the condition is significant. Written in clear, patient-friendly language. Connects the disease to its body system." },
+      { score: 3, label: "Meets Expectations",      text: "Provides an accurate overview including disease definition and who is affected. May be missing one minor element (e.g., statistics or significance) but content is correct and clearly communicated." },
+      { score: 2, label: "Approaching Expectations",text: "Provides a basic definition of the disease but lacks important context such as who is affected, prevalence, or significance. Description may be vague, incomplete, or copied without being rewritten in student's own words." },
+      { score: 1, label: "Below Expectations",      text: "A disease name or partial definition is present but the overview is severely incomplete, inaccurate, or difficult to understand. Little evidence of research or original explanation." },
+      { score: 0, label: "Missing / Not Attempted", text: "No disease overview is present. The element is entirely missing from the infographic." },
+    ]
+  },
+  {
+    num: "2",
+    title: "Signs & Symptoms",
+    subtitle: "Detailed description of how the disease presents — what patients experience and what clinicians observe",
+    exemplar: "The Sarcopenia infographic distinguishes between Symptoms (what the patient experiences — difficulty moving, progressive worsening) and Signs (observable findings — loss of muscle mass, fatigue, weakness, coordination loss, balance difficulties). Both categories are clearly labeled and visually separated.",
+    descriptors: [
+      { score: 4, label: "Exceeds Expectations",    text: "Identifies and clearly describes at least 4–5 specific signs and/or symptoms with enough detail that a reader unfamiliar with the disease could recognize it. Distinguishes between signs and symptoms where applicable. Uses accurate medical terminology alongside plain-language explanations." },
+      { score: 3, label: "Meets Expectations",      text: "Identifies at least 3–4 accurate signs and/or symptoms with adequate descriptions. May not fully distinguish signs from symptoms but information is correct. Medical terminology is used with reasonable accuracy." },
+      { score: 2, label: "Approaching Expectations",text: "Lists 2–3 signs or symptoms but descriptions are brief or vague. May list symptoms without explaining them, or confuse signs with symptoms. Terminology may be missing or used incorrectly." },
+      { score: 1, label: "Below Expectations",      text: "Only 1–2 signs or symptoms are listed with little or no description. Content may be inaccurate or too generic to be meaningfully informative about the specific disease." },
+      { score: 0, label: "Missing / Not Attempted", text: "No signs or symptoms are listed. This element is entirely absent from the infographic." },
+    ]
+  },
+  {
+    num: "3",
+    title: "Etiology & Risk Factors",
+    subtitle: "Explanation of what causes the disease and what increases a person's risk — written for patients and families",
+    exemplar: "The Sarcopenia infographic explains etiology in two layers: (1) a plain-language biological process explanation (\"muscles lose mass and can waste away — atrophy — starting in your 30s\"), and (2) four labeled risk factor boxes — Lack of Exercise, Malnutrition, Hormonal Changes, Chronic Inflammation — each with an accessible patient-directed explanation.",
+    descriptors: [
+      { score: 4, label: "Exceeds Expectations",    text: "Clearly explains the underlying biological cause of the disease in language a patient and family could understand. Identifies at least 3 specific, accurate risk factors with brief explanations of why each increases risk. Writing is directed at the patient/family rather than written as a clinical report." },
+      { score: 3, label: "Meets Expectations",      text: "Explains the cause of the disease adequately and identifies 2–3 risk factors. Explanation is mostly patient-friendly but may include some unexplained terminology. Risk factors are accurate but may lack explanatory detail." },
+      { score: 2, label: "Approaching Expectations",text: "Provides a partial or superficial explanation of cause. Identifies 1–2 risk factors without meaningful explanation. Tone is overly clinical without translation for the patient/family audience." },
+      { score: 1, label: "Below Expectations",      text: "Etiology is mentioned but inaccurate, extremely vague, or copied verbatim without understanding. Risk factors are absent or incorrect." },
+      { score: 0, label: "Missing / Not Attempted", text: "No etiology or risk factor information is present. This element is entirely missing from the infographic." },
+    ]
+  },
+  {
+    num: "4",
+    title: "Diagnosis (Testing)",
+    subtitle: "Explanation of how the disease is identified — what tests are used and what they measure or detect",
+    exemplar: "The Sarcopenia infographic devotes a full second page to diagnosis, listing four imaging tests (DEXA, BIA, CT scan, MRI) and four functional strength tests (handgrip strength, repeated chair stands, gait speed, timed up-and-go), each with a clear description of what the test does.",
+    descriptors: [
+      { score: 4, label: "Exceeds Expectations",    text: "Identifies at least 3 diagnostic tests or procedures. For each test, explains: (1) what the test is, and (2) what it measures or looks for in relation to this disease. Includes both lab/imaging tests AND functional or clinical assessments where relevant. Information is accurate and written clearly." },
+      { score: 3, label: "Meets Expectations",      text: "Identifies 2–3 diagnostic tests with adequate explanation of what each test does. May focus only on one type of testing. Information is accurate." },
+      { score: 2, label: "Approaching Expectations",text: "Lists 1–2 tests by name but provides little or no explanation of what the tests measure or why they are used for this specific disease." },
+      { score: 1, label: "Below Expectations",      text: "Mentions that testing is required but does not name specific tests, or names a single test with no explanation of its purpose." },
+      { score: 0, label: "Missing / Not Attempted", text: "No diagnostic testing information is present. This element is entirely missing from the infographic." },
+    ]
+  },
+  {
+    num: "5",
+    title: "Prognosis & Treatment",
+    subtitle: "What patients can expect going forward — outlook, management strategies, and quality of life",
+    exemplar: "The Sarcopenia infographic addresses treatment (resistance training twice weekly, dietary changes, adequate protein/vitamins) and prognosis by noting the condition is \"progressive\" but that \"certain lifestyle changes can help you manage this issue.\" Tone is supportive and action-oriented.",
+    descriptors: [
+      { score: 4, label: "Exceeds Expectations",    text: "Clearly explains the prognosis — what the patient can realistically expect. Describes the treatment plan in enough detail for a patient to understand next steps, including specific medications, therapies, or lifestyle changes. Addresses quality of life and any long-term monitoring. Tone is supportive and patient-focused." },
+      { score: 3, label: "Meets Expectations",      text: "Describes prognosis and at least 2 treatment approaches with reasonable detail. May not fully explain long-term expectations but overall content is accurate and patient-appropriate." },
+      { score: 2, label: "Approaching Expectations",text: "Mentions that treatment exists or that prognosis is generally good/poor, but provides little specific information. Treatment section may list options without explaining them." },
+      { score: 1, label: "Below Expectations",      text: "Only a sentence or phrase about prognosis or treatment is present, with no meaningful detail. Information may be inaccurate or inapplicable to the specific disease." },
+      { score: 0, label: "Missing / Not Attempted", text: "No prognosis or treatment information is present. This element is entirely missing from the infographic." },
+    ]
+  },
+  {
+    num: "6",
+    title: "Visual Design & Presentation",
+    subtitle: "Layout, clarity, visual organization, and overall readability of the infographic",
+    exemplar: "The Sarcopenia infographic uses a consistent coral/pink color scheme, distinct section headers with rounded labels, relevant illustrations (elderly figure, brain, muscle anatomy, exercise images), a clear visual hierarchy, and white space to separate sections. Content is scannable, not a wall of text.",
+    descriptors: [
+      { score: 4, label: "Exceeds Expectations",    text: "Infographic is visually polished and clearly organized. Uses: (1) a distinct title/header, (2) labeled sections matching required content areas, (3) relevant visuals or icons, (4) consistent color scheme and fonts, (5) appropriate white space. A patient or family member could read and understand it without prior medical knowledge." },
+      { score: 3, label: "Meets Expectations",      text: "Infographic is organized and readable with clearly labeled sections. Visuals are present and relevant. Minor design issues (inconsistent colors, crowded text) but overall presentation is effective." },
+      { score: 2, label: "Approaching Expectations",text: "Infographic has a basic layout but design is inconsistent or hard to follow. Sections may not be clearly labeled, visuals may be absent or irrelevant. Appears as a list of text rather than a true infographic." },
+      { score: 1, label: "Below Expectations",      text: "Minimal visual design effort. Content is present but as plain text with little or no visual organization, color, or imagery. Does not resemble an infographic in format." },
+      { score: 0, label: "Missing / Not Attempted", text: "No infographic was submitted, or the submission is a written paragraph/report rather than an infographic format." },
+    ]
+  },
+];
+
+const scoreClass = (s) => ['opt-0','opt-1','opt-2','opt-3','opt-4'][s];
+const scoreColorClass = (s) => ['s0','s1','s2','s3','s4'][s];
+
+// ── Render categories ──────────────────────────────────────────────────────────
+function renderCategories() {
+  const container = document.getElementById('categories-container');
+  const summaryContainer = document.getElementById('summary-rows');
+
+  categories.forEach((cat, ci) => {
+    // Card
+    const card = document.createElement('div');
+    card.className = 'category-card';
+    card.id = `cat-card-${ci}`;
+
+    card.innerHTML = `
+      <div class="cat-header">
+        <div class="cat-number">Category ${cat.num} of ${categories.length}</div>
+        <div class="cat-title">${cat.title}</div>
+        <div class="cat-subtitle">${cat.subtitle}</div>
+      </div>
+      <div class="exemplar-strip">
+        <strong>📋 Sarcopenia Exemplar:</strong> ${cat.exemplar}
+      </div>
+      <div class="score-options" id="opts-${ci}">
+        ${[4,3,2,1,0].map(s => `
+          <label class="score-option ${scoreClass(s)}">
+            <input type="radio" name="cat-${ci}" value="${s}" onchange="updateScore(${ci}, ${s})">
+            <div class="option-content">
+              <div class="option-badge">
+                <span class="badge-num">${s}</span>
+                <span class="badge-label">${cat.descriptors.find(d=>d.score===s).label}</span>
+              </div>
+              <div class="option-desc">${cat.descriptors.find(d=>d.score===s).text}</div>
+            </div>
+          </label>
+        `).join('')}
+      </div>
+      <div class="cat-feedback">
+        <label>Category Feedback (optional)</label>
+        <textarea placeholder="Specific feedback for this category…" id="fb-${ci}"></textarea>
+      </div>
+    `;
+    container.appendChild(card);
+
+    // Summary row
+    const row = document.createElement('div');
+    row.className = 'summary-row';
+    row.id = `sum-row-${ci}`;
+    row.innerHTML = `
+      <div class="sum-cat">${cat.num}. ${cat.title}</div>
+      <div class="sum-pts unset" id="sum-pts-${ci}">—</div>
+      <div class="sum-max">/ 4</div>
+    `;
+    summaryContainer.appendChild(row);
+  });
+}
+
+// ── Score tracking ─────────────────────────────────────────────────────────────
+const scores = new Array(categories.length).fill(null);
+
+function updateScore(catIndex, score) {
+  scores[catIndex] = score;
+  const el = document.getElementById(`sum-pts-${catIndex}`);
+  el.textContent = score;
+  el.classList.remove('unset');
+  updateTotal();
+}
+
+function updateTotal() {
+  const filled = scores.filter(s => s !== null);
+  if (filled.length === 0) {
+    document.getElementById('total-display').textContent = 'Total: — / 24';
+    return;
+  }
+  const total = filled.reduce((a, b) => a + b, 0);
+  document.getElementById('total-display').textContent = `Total: ${total} / 24`;
+}
+
+function clearForm() {
+  if (!confirm('Reset all scores and feedback? This cannot be undone.')) return;
+  scores.fill(null);
+  document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+  document.querySelectorAll('textarea').forEach(t => t.value = '');
+  document.querySelectorAll('input[type="text"]').forEach(i => i.value = '');
+  for (let i = 0; i < categories.length; i++) {
+    const el = document.getElementById(`sum-pts-${i}`);
+    el.textContent = '—';
+    el.classList.add('unset');
+  }
+  document.getElementById('total-display').textContent = 'Total: — / 24';
+}
+
+renderCategories();
+</script>
+</body>
+</html>
